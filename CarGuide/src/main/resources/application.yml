@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: CarGuide
+  jpa:
+    open-in-view: false
+  output:
+    ansi:
+      enabled: ALWAYS
+  profiles:
+    active: ${APP_PROFILE:test}
+
+cors:
+  origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:5173,http://localhost:8080/h2/**}
+security:
+  client-id: ${CLIENT_ID:appClientId}
+  client-secret: ${CLIENT_SECRET:appClientSecret}
+  jwt:
+    duration: ${JWT_DURATION:86400}
+
+server:
+  port: 8080
+
+logging:
+  file: ""
+  level:
+    root: INFO
