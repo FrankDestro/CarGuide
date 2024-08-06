@@ -1,7 +1,6 @@
 # CarGuide Catalogo de carros. 
 
 
-
 ## Tela de catalogo dos carros, por ordem de valor
 ![image](https://github.com/user-attachments/assets/eed7935d-d77e-409b-b46c-c83fafb12087)
 
