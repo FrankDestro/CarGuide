@@ -5,9 +5,7 @@
 ## Tela de catalogo dos carros, por ordem de valor
 ![image](https://github.com/user-attachments/assets/eed7935d-d77e-409b-b46c-c83fafb12087)
 
-sendo possivel carregar mais itens 
 ![image](https://github.com/user-attachments/assets/4a3fd01a-93ac-4253-a836-47180c00ef73)
-
 
 ## Para acessar a area admin é necessário logar na aplicação com usuário administrador. 
 
