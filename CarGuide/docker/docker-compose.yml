@@ -1,0 +1,68 @@
+version: '3.9'
+
+networks:
+  carguide_app_network:
+    driver: bridge
+volumes:
+  carguide_db_data:
+    driver: bridge
+
+  # ====================================================================================================================
+  # POSTGRES SERVER
+  # ====================================================================================================================
+  pg-docker:
+    image: postgres:latest
+    restart: unless-stopped
+    container_name: postgresql_carguide
+    environment:
+      POSTGRES_DB: 'carguide_db'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'G#7tZq9mW!3rXf2N'
+    ports:
+      - 5433:5432
+    volumes:
+      - ./.data/postgresql/data:/etc/postgresql/data
+    networks:
+      - carguide_app_network
+  # ====================================================================================================================
+  # PGADMIN
+  # ====================================================================================================================
+  pgadmin-docker:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    container_name: dev-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin-server@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: G#7tZq9mW!3rXf2N
+    ports:
+      - 5050:80
+    volumes:
+      - /home/Frank/IdeaProjects/SupportService-v3.0/back/docker/.data/pgadmin:/etc/pgadmin
+    depends_on:
+      - pg-docker
+    networks:
+      - carguide_app_network
+  # ====================================================================================================================
+  # CARGUIDE API
+  # ====================================================================================================================
+  carguide-service:
+    platform: linux/x86_64
+    container_name: carguide_api_restfull
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: carguide-api_restfull_service
+    ports:
+      - '8089:8089'
+    depends_on:
+      - mysql-ibeer
+      - redis-ibeer
+    networks:
+      - carguide_app_network
+    env_file:
+      - ./.env
+    environment:
+      SPRING_DATASOURCE_URL: $MYSQL_DATABASE_URL
+    restart: unless-stopped
+
+

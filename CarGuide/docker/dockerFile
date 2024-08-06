@@ -1,0 +1,15 @@
+FROM openjdk:21-jdk-alpine
+
+LABEL name="Car Guide"
+LABEL description="API for cataloging vehicles"
+LABEL maintainer="franklyn.damaceno@gmail.com"
+
+RUN addgroup -S carguide-group && adduser -S carguide-user -G carguide-group
+USER carguide-user:carguide-group
+
+ARG JAR_FILE=build/libs/*jar
+COPY ${JAR_FILE} ibeer-service.jar
+
+ADD ./target/CarGuide-0.0.1-SNAPSHOT.jar CarGuide.jar
+
+EXPOSE 8089

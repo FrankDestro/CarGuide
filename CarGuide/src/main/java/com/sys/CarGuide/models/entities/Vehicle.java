@@ -2,7 +2,6 @@ package com.sys.CarGuide.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -21,8 +20,5 @@ public class Vehicle {
     private String model;
     private String brand;
     private Double valueAmount;
-
-    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<VehicleImages> vehicleImages;
-
+    private String imgUrl;
 }
